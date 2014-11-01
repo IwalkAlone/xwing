@@ -3,6 +3,11 @@ var games = require('./games');
 var _ = require('lodash');
 var app = express();
 
+app.use(function (req, res, next) {
+    res.set('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 app.get('/', function (req, res) {
     res.send('Hello World!')
 });
@@ -19,7 +24,8 @@ app.get('/games/create', function (req, res) {
         return;
     };
     games.create(hostname);
-    res.sendStatus(201);
+    var gamesList = games.list();
+    res.status(201).send(gamesList);
 });
 
 var server = app.listen(3000, function () {

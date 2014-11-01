@@ -17,7 +17,7 @@ function list() {
 function create(playerName) {
     var game = {
         id: newId(),
-        host: playerName
+        hostname: playerName
     };
     games.push(game);
 }
