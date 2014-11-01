@@ -1,1 +1,1 @@
-angular.module('main', [])
+angular.module('main', ['btford.socket-io']);

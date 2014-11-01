@@ -1,5 +1,5 @@
 angular.module('main')
-.factory('lobbyModel', ['$http', function ($http) {
+.factory('lobbyModel', ['$http', 'lobbySocket', function ($http, lobbySocket) {
         var apiUrl = 'http://localhost:3000';
         var gamesListUrl = '/games';
         var createGameUrl = '/games/create';

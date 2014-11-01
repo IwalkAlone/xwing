@@ -35,3 +35,10 @@ var server = app.listen(3000, function () {
 
     console.log('Example app listening at http://%s:%s', host, port);
 });
+
+var io = require('socket.io')(server);
+io.on('connection', function (a) {
+    io.emit('clientConnected');
+    console.log('client connected');
+    console.log(a);
+});
