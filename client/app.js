@@ -1,1 +1,2 @@
-angular.module('main', ['btford.socket-io']);
+angular.module('main', ['btford.socket-io'])
+    .run(['lobbySocket', function (lobbySocket) {}]);

@@ -1,7 +1,4 @@
 angular.module('main')
-.controller('lobbyController', ['$scope', 'lobbyModel', 'lobbySocket', function ($scope, lobbyModel, lobbySocket) {
+.controller('lobbyController', ['$scope', 'lobbyModel', function ($scope, lobbyModel) {
         $scope.lobby = lobbyModel;
-        $scope.$on('socket:clientConnected', function () {
-            alert('clientConnected');
-        })
     }]);

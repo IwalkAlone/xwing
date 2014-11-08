@@ -13,8 +13,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/games', function (req, res) {
-    var gamesList = games.list();
-    res.send(gamesList);
+    res.send(games.list());
 });
 
 app.get('/games/create', function (req, res) {
@@ -22,10 +21,34 @@ app.get('/games/create', function (req, res) {
     if (_.isUndefined(hostname)) {
         res.sendStatus(400);
         return;
-    };
+    }
     games.create(hostname);
-    var gamesList = games.list();
-    res.status(201).send(gamesList);
+    io.emit('updateGamesList', games.list());
+    res.sendStatus(200);
+});
+
+app.get('/games/join', function (req, res) {
+    var playerName = req.query.playername;
+    var gameId = req.query.gameid;
+    if (_.isUndefined(playerName) || _.isUndefined(gameId)) {
+        res.sendStatus(400);
+        return;
+    }
+    games.join(gameId, playerName);
+    io.emit('updateGamesList', games.list());
+    res.sendStatus(200);
+});
+
+app.get('/games/start', function (req, res) {
+    var gameId = req.query.gameid;
+    if (_.isUndefined(gameId)) {
+        res.sendStatus(400);
+        return;
+    }
+    if (games.start(gameId)) {
+        io.emit('updateGamesList', games.list());
+    };
+    res.sendStatus(200);
 });
 
 var server = app.listen(3000, function () {
@@ -37,8 +60,7 @@ var server = app.listen(3000, function () {
 });
 
 var io = require('socket.io')(server);
-io.on('connection', function (a) {
-    io.emit('clientConnected');
+io.on('connection', function (socket) {
+    socket.emit('updateGamesList', games.list());
     console.log('client connected');
-    console.log(a);
 });

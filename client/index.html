@@ -25,10 +25,16 @@
             <table>
                 <tr ng-repeat="_game in lobby.games">
                     <td>
-                        {{_game.hostname}}
+                        {{_game.p1}}
                     </td>
                     <td>
-                        <input type="button" ng-click="lobby.joinGame(_game.id)" value="Join Game">
+                        {{_game.p2}}
+                    </td>
+                    <td>
+                        <input type="button" ng-click="lobby.joinGame(lobby.playerName, _game.id)" value="Join Game">
+                    </td>
+                    <td>
+                        <input type="button" ng-click="lobby.startGame(_game.id)" value="Start Game">
                     </td>
                 </tr>
             </table>

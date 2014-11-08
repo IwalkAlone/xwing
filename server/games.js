@@ -17,9 +17,22 @@ function list() {
 function create(playerName) {
     var game = {
         id: newId(),
-        hostname: playerName
+        p1: playerName
     };
     games.push(game);
+}
+
+function join(gameId, playerName) {
+    var game = getById(gameId);
+    if (!game) return;
+    game.p2 = playerName;
+}
+
+function start(gameId) {
+    var game = getById(gameId);
+    if (!game) return false;
+    cancel(gameId);
+    return true;
 }
 
 function cancel (gameId) {
@@ -28,6 +41,17 @@ function cancel (gameId) {
     })
 }
 
+function getById (id) {
+    for (var i = 0; i<games.length; i++) {
+        if (games[i].id == id) {
+            return games[i];
+        }
+    }
+    return null;
+}
+
 exports.list = list;
 exports.create = create;
 exports.cancel = cancel;
+exports.join = join;
+exports.start = start;
