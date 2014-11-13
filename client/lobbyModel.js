@@ -15,10 +15,7 @@ angular.module('main')
         };
 
         function createGame(hostname) {
-            $http.get(apiUrl + createGameUrl + '?hostname=' + hostname)
-                .success(function (data) {
-                    model.games = data;
-                });
+            $http.get(apiUrl + createGameUrl + '?hostname=' + hostname);
         }
 
         function joinGame(name, gameId) {
