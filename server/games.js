@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash');
 
 var games = [];
@@ -5,9 +7,9 @@ var games = [];
 var newId = (function () {
     var id = 0;
     return function () {
-        id++;
+        id += 1;
         return id;
-    }
+    };
 }());
 
 function list() {
@@ -24,30 +26,28 @@ function create(playerName) {
 
 function join(gameId, playerName) {
     var game = getById(gameId);
-    if (!game) return;
+    if (!game) { return; }
     game.p2 = playerName;
 }
 
 function start(gameId) {
     var game = getById(gameId);
-    if (!game) return false;
+    if (!game) { return false; }
     cancel(gameId);
     return true;
 }
 
 function cancel (gameId) {
     _.remove(games, function (game) {
-        return game.id == gameId;
-    })
+        return game.id === gameId;
+    });
 }
 
 function getById (id) {
-    for (var i = 0; i<games.length; i++) {
-        if (games[i].id == id) {
-            return games[i];
-        }
-    }
-    return null;
+    var game = _.find(games, function(game) {
+        return game.id === id;
+    });
+    return game;
 }
 
 exports.list = list;

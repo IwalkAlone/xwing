@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('main')
 .factory('lobbyModel', ['$http', '$rootScope', function ($http, $rootScope) {
         var apiUrl = 'http://localhost:3000';
@@ -16,7 +18,7 @@ angular.module('main')
             $http.get(apiUrl + createGameUrl + '?hostname=' + hostname)
                 .success(function (data) {
                     model.games = data;
-                })
+                });
         }
 
         function joinGame(name, gameId) {

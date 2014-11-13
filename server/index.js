@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var games = require('./games');
 var _ = require('lodash');
@@ -9,7 +11,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function (req, res) {
-    res.send('Hello World!')
+    res.send('Hello World!');
 });
 
 app.get('/games', function (req, res) {
@@ -23,7 +25,7 @@ app.get('/games/create', function (req, res) {
         return;
     }
     games.create(hostname);
-    io.emit('updateGamesList', games.list());
+    socketServer.emit('updateGamesList', games.list());
     res.sendStatus(200);
 });
 
@@ -34,8 +36,8 @@ app.get('/games/join', function (req, res) {
         res.sendStatus(400);
         return;
     }
-    games.join(gameId, playerName);
-    io.emit('updateGamesList', games.list());
+    games.join(+gameId, +playerName);
+    socketServer.emit('updateGamesList', games.list());
     res.sendStatus(200);
 });
 
@@ -45,9 +47,9 @@ app.get('/games/start', function (req, res) {
         res.sendStatus(400);
         return;
     }
-    if (games.start(gameId)) {
-        io.emit('updateGamesList', games.list());
-    };
+    if (games.start(+gameId)) {
+        socketServer.emit('updateGamesList', games.list());
+    }
     res.sendStatus(200);
 });
 
@@ -59,8 +61,11 @@ var server = app.listen(3000, function () {
     console.log('Example app listening at http://%s:%s', host, port);
 });
 
-var io = require('socket.io')(server);
-io.on('connection', function (socket) {
+var socketServer = require('socket.io')(server);
+socketServer.on('connection', function (socket) {
     socket.emit('updateGamesList', games.list());
     console.log('client connected');
 });
+
+
+
