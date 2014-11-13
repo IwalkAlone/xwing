@@ -1,0 +1,23 @@
+<div ng-controller="lobbyController">
+    <input type="text" ng-model="lobby.playerName" value="Player"/>
+    <input type="button" ng-click="lobby.createGame(lobby.playerName)" value="Create Game">
+    <div>
+        <p>Open games</p>
+        <table>
+            <tr ng-repeat="_game in lobby.games">
+                <td>
+                    {{_game.p1}}
+                </td>
+                <td>
+                    {{_game.p2}}
+                </td>
+                <td>
+                    <input type="button" ng-click="lobby.joinGame(lobby.playerName, _game.id)" value="Join Game">
+                </td>
+                <td>
+                    <input type="button" ng-click="lobby.startGame(_game.id)" value="Start Game">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
