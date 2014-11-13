@@ -34,7 +34,7 @@ function start(gameId) {
     var game = getById(gameId);
     if (!game) { return false; }
     cancel(gameId);
-    return true;
+    return game;
 }
 
 function cancel (gameId) {
