@@ -29,7 +29,7 @@ app.get('/games/create', function (req, res) {
         return;
     }
     games.create(hostname);
-    socketServer.emit('updateGamesList', games.list());
+    pushGamesUpdate();
     res.sendStatus(200);
 });
 
@@ -41,7 +41,7 @@ app.get('/games/join', function (req, res) {
         return;
     }
     games.join(+gameId, playerName);
-    socketServer.emit('updateGamesList', games.list());
+    pushGamesUpdate();
     res.sendStatus(200);
 });
 
@@ -58,7 +58,7 @@ app.get('/games/start', function (req, res) {
         return;
     }
 
-    socketServer.emit('updateGamesList', games.list());
+    pushGamesUpdate();
     socketServer.emit('gameStart');
     gameEngine.startGame(game, socketServer);
 
@@ -84,14 +84,21 @@ socketServer.on('connection', function (socket) {
         socket.player = player;
         players.add(player);
         socket.emit('updateGamesList', games.list());
-        socketServer.emit('updatePlayersList', players.list());
+        pushPlayersUpdate();
         console.log('Add player, id=' + player.id + ',name=' + player.name);
         
         socket.on('disconnect', function () {
             console.log('Client disconnected, id=' + player.id + ',name=' + player.name);
             players.remove(player);
-            socketServer.emit('updatePlayersList', players.list());
+            pushPlayersUpdate();
         });
     });
 });
 
+function pushGamesUpdate() {
+    socketServer.emit('updateGamesList', games.list());
+}
+
+function pushPlayersUpdate() {
+    socketServer.emit('updatePlayersList', players.list());
+}
