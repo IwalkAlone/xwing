@@ -4,6 +4,7 @@ var express = require('express');
 var _ = require('lodash');
 
 var games = require('./games');
+var players = require('./connectedPlayers');
 var gameEngine = require('./gameEngine');
 
 var app = express();
@@ -74,11 +75,23 @@ var server = app.listen(3000, function () {
 
 var socketServer = require('socket.io')(server);
 socketServer.on('connection', function (socket) {
-    socket.emit('updateGamesList', games.list());
-    socket.on('decisionResponse', function (obj) {
-        console.log(obj);
+    console.log('Client connected');
+    socket.on('joinLobby', function (name) {
+        var player = {
+            name: name,
+            socket: socket
+        };
+        socket.player = player;
+        players.add(player);
+        socket.emit('updateGamesList', games.list());
+        socketServer.emit('updatePlayersList', players.list());
+        console.log('Add player, id=' + player.id + ',name=' + player.name);
+        
+        socket.on('disconnect', function () {
+            console.log('Client disconnected, id=' + player.id + ',name=' + player.name);
+            players.remove(player);
+            socketServer.emit('updatePlayersList', players.list());
+        });
     });
-    console.log('client connected');
 });
-
 

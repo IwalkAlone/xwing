@@ -1,5 +1,6 @@
 <div ng-controller="lobbyController">
     <input type="text" ng-model="lobby.playerName" value="Player"/>
+    <input type="button" ng-click="lobby.connect(lobby.playerName)" value="Connect">
     <input type="button" ng-click="lobby.createGame(lobby.playerName)" value="Create Game">
     <div>
         <p>Open games</p>
@@ -19,5 +20,9 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div>
+        <p>Players</p>
+        <p ng-repeat="_player in lobby.players">id: {{_player.id}} name: {{_player.name}}</p>
     </div>
 </div>
