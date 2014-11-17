@@ -12,7 +12,9 @@ angular.module('main')
                     socket.forward('gameStart');
                     socket.forward('decision');
 
-                    socket.emit('joinLobby', name);
+                    socket.on('connect', function () {
+                        socket.emit('joinLobby', name);
+                    });
 
                     return socket;
             }
