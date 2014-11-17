@@ -75,6 +75,9 @@ var server = app.listen(3000, function () {
 var socketServer = require('socket.io')(server);
 socketServer.on('connection', function (socket) {
     socket.emit('updateGamesList', games.list());
+    socket.on('decisionResponse', function (obj) {
+        console.log(obj);
+    });
     console.log('client connected');
 });
 

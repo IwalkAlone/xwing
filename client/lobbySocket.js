@@ -5,6 +5,8 @@ angular.module('main')
         var ioSocket = io.connect('http://localhost:3000');
         var socket = socketFactory({ioSocket: ioSocket});
         socket.forward('updateGamesList');
+        socket.forward('gameStart');
+        socket.forward('decision');
 
         return socket;
     }]);

@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 
-function startGame (game, socket) {
+function startGame (game, socketSrv) {
     var a = 30;
     var decisionObject = {
         id: 1,
@@ -11,10 +11,7 @@ function startGame (game, socket) {
             {id: 2, name: 'Add'}
         ]
     };
-    socket.emit('decision', decisionObject);
-    socket.on('decisionResponse', function (socket, obj) {
-        console.log(obj);
-    });
+    socketSrv.emit('decision', decisionObject);
 }
 
 

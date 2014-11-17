@@ -34,5 +34,9 @@ angular.module('main')
             $state.go('game');
         });
 
+        $rootScope.$on('socket:decision', function (event, decision) {
+            console.log(decision);
+        });
+
         return model;
     }]);

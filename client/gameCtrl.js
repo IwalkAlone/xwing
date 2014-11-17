@@ -7,6 +7,6 @@ angular.module('main')
         })
         
         $scope.buttonClick = function () {
-            lobbySocket.send('decisionResponse', {id: 1});
+            lobbySocket.emit('decisionResponse', {id: 1});
         };
     }]);
