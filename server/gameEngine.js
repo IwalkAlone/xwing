@@ -9,6 +9,8 @@ function startGame (game) {
     _.each(gameState.players, function (player) {
         player.socket.emit('gameStart');
     });
+
+    gameState.start();
 }
 
-exports.startGame = startGame;
+module.exports.startGame = startGame;

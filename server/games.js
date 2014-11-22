@@ -57,8 +57,8 @@ function getById (id) {
     return game;
 }
 
-exports.list = list;
-exports.create = create;
-exports.cancel = cancel;
-exports.join = join;
-exports.start = start;
+module.exports.list = list;
+module.exports.create = create;
+module.exports.cancel = cancel;
+module.exports.join = join;
+module.exports.start = start;

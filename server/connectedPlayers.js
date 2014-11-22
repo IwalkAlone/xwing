@@ -32,6 +32,6 @@ function remove(player) {
     });
 }
 
-exports.list = list;
-exports.add = add;
-exports.remove = remove;
+module.exports.list = list;
+module.exports.add = add;
+module.exports.remove = remove;

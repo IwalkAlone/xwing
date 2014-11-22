@@ -1,6 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
+var Q = require('q');
+var stepIterator = require('./steps/stepIterator').create();
 
 function init(game) {
     var state = {
@@ -44,36 +46,30 @@ function init(game) {
         atk: 1
     });
 
-    var steps = (function (state) {
-        var sequence = [turnStart, combat];
-        var index = -1;
-
-        function nextStep() {
-            index = (index + 1) % sequence.length;
-            return sequence[index];
-        }
-    })(state);
-
-    state.steps = steps;
+    state.nextStep = stepIterator.next;
+    state.start = function () {
+        start(state);
+    };
 
     return state;
 }
 
-
-function turnStart(state) {
-    state.turn += 1;
+function start(state) {
+    doStep(state);
 }
 
-function combat(state) {
+function doStep(state) {
+    var stepEnd = Q.defer();
+    var stepEndPromise = stepEnd.promise;
+    var step = state.nextStep();
+    step(state, stepEnd);
+    stepEndPromise.then(function () {
+        if (state.turn <= 5) {
+            doStep(state);
+        }
+    });
 
+    return stepEndPromise;
 }
 
-function applyDecision(state, decision) {
-
-}
-
-function advanceToDecision(state) {
-    var decision = {};
-    return decision;
-}
-
+module.exports.init = init;
