@@ -119,6 +119,12 @@ function joinGame(player, gameId) {
 
 function startGame(gameId) {
     var game = games.start(gameId);
+    var roomName = 'Game ' + gameId;
+    _.each(game.players, function (player) {
+        player.socket.join(roomName);
+    });
+    var toAllPlayers = socketServer.to(roomName);
+    game.socket = toAllPlayers;
     pushGamesUpdate();
     gameEngine.startGame(game);
 }

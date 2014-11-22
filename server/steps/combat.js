@@ -1,7 +1,7 @@
 'use strict';
 
 function combat(state, stepEnd) {
-    console.log('Turn ' + state.turn + ' Combat ');
+    state.log('Turn ' + state.turn + ' Combat ');
     stepEnd.resolve();
 }
 

@@ -2,7 +2,7 @@
 
 function turnStart(state, stepEnd) {
     state.turn += 1;
-    console.log('Turn ' + state.turn);
+    state.log('Turn ' + state.turn);
     stepEnd.resolve();
 }
 
