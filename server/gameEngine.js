@@ -1,22 +1,14 @@
 'use strict';
 
 var _ = require('lodash');
+var gameStateInitializer = require('./state');
 
 function startGame (game) {
-    var a = 30;
-    var decisionObject = {
-        id: 1,
-        options: [
-            {id: 1, name: 'Multiply'},
-            {id: 2, name: 'Add'}
-        ]
-    };
-    _.each(game.players, function (player) {
+    var gameState = gameStateInitializer.init(game);
+
+    _.each(gameState.players, function (player) {
         player.socket.emit('gameStart');
     });
-    game.players[0].socket.emit('decision', decisionObject);
 }
-
-
 
 exports.startGame = startGame;
