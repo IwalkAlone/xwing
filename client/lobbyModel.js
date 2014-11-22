@@ -1,11 +1,7 @@
 'use strict';
 
 angular.module('main')
-.factory('lobbyModel', ['$http', '$rootScope', '$state', 'lobbySocket', function ($http, $rootScope, $state, lobbySocket) {
-        var apiUrl = 'http://localhost:3000';
-        var createGameUrl = '/games/create';
-        var joinGameUrl = '/games/join';
-        var startGameUrl = '/games/start';
+.factory('lobbyModel', ['$rootScope', '$state', 'lobbySocket', function ($rootScope, $state, lobbySocket) {
 
         var model = {
             games: [],
@@ -22,16 +18,16 @@ angular.module('main')
             socket = lobbySocket(name);
         }
 
-        function createGame(hostname) {
-            $http.get(apiUrl + createGameUrl + '?hostname=' + hostname);
+        function createGame() {
+            socket.emit('createGame');
         }
 
-        function joinGame(name, gameId) {
-            $http.get(apiUrl + joinGameUrl + '?playername=' + name + '&gameid=' + gameId);
+        function joinGame(gameId) {
+            socket.emit('joinGame', gameId);
         }
 
         function startGame(gameId) {
-            $http.get(apiUrl + startGameUrl + '?gameid=' + gameId);
+            socket.emit('startGame', gameId);
         }
 
         $rootScope.$on('socket:updateGamesList', function (event, list) {

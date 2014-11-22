@@ -86,7 +86,19 @@ socketServer.on('connection', function (socket) {
         socket.emit('updateGamesList', games.list());
         pushPlayersUpdate();
         console.log('Add player, id=' + player.id + ',name=' + player.name);
-        
+
+        socket.on('createGame', function() {
+            createGame(player);
+        });
+
+        socket.on('joinGame', function (gameId) {
+            joinGame(player, gameId);
+        });
+
+        socket.on('startGame', function (gameId) {
+            startGame(gameId);
+        });
+
         socket.on('disconnect', function () {
             console.log('Client disconnected, id=' + player.id + ',name=' + player.name);
             players.remove(player);
@@ -94,6 +106,22 @@ socketServer.on('connection', function (socket) {
         });
     });
 });
+
+function createGame(player) {
+    games.create(player);
+    pushGamesUpdate();
+}
+
+function joinGame(player, gameId) {
+    games.join(player, gameId);
+    pushGamesUpdate();
+}
+
+function startGame(gameId) {
+    var game = games.start(gameId);
+    pushGamesUpdate();
+    gameEngine.startGame(game);
+}
 
 function pushGamesUpdate() {
     socketServer.emit('updateGamesList', games.list());

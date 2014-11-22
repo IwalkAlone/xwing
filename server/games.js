@@ -13,21 +13,28 @@ var newId = (function () {
 }());
 
 function list() {
-    return games;
+    return _.map(games, function (game) {
+        return {
+            id: game.id,
+            players: _.map(game.players, function (player) {
+                return player.name;
+            })
+        };
+    });
 }
 
-function create(playerName) {
+function create(player) {
     var game = {
         id: newId(),
-        p1: playerName
+        players: [player]
     };
     games.push(game);
 }
 
-function join(gameId, playerName) {
+function join(player, gameId) {
     var game = getById(gameId);
     if (!game) { return; }
-    game.p2 = playerName;
+    game.players.push(player);
 }
 
 function start(gameId) {
