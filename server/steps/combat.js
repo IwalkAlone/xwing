@@ -24,6 +24,8 @@ function combat(state) {
     var processAllShips = _.reduce(orderedShips, function (shipSequence, ship) {
         return shipSequence.then(function (state) {
             return processShip(ship, state);
+        }).then(function (state) {
+            return cleanUpDestroyedShips(state);
         });
     }, q(state));
     
@@ -59,7 +61,7 @@ function processShip(ship, state) {
 }
 
 function attackTarget(attacker, defender, state) {
-    defender.hull -= attacker.atk;
+    defender.takeDamage(attacker.atk);
     state.log(attacker.name + ' deals ' + attacker.atk + ' damage to ' + defender.name);
 }
 
@@ -68,6 +70,16 @@ function getTargetsForShip(ship, state) {
         return ship.player !== otherShip.player;
     });
     return targets;
+}
+
+function cleanUpDestroyedShips(state) {
+    var destroyedShips = _.remove(state.ships, function (ship) {
+        return ship.isDestroyed;
+    });
+    _.each(destroyedShips, function (ship) {
+        state.log(ship.name + ' is destroyed');
+    });
+    return state;
 }
 
 module.exports = combat;

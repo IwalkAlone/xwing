@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var q = require('q');
 var createLogger = require('./gameLog').create;
+var createShip = require('./ship');
 var createStepIterator = require('./steps/stepIterator').create;
 
 function init(game) {
@@ -18,49 +19,37 @@ function init(game) {
 
     var stepIterator = createStepIterator();
 
-    ships.push({
+    ships.push(createShip({
         player: state.players[0],
-        id: 1,
         name: 'X-Wing',
-        x: 20,
-        y: 20,
         skill: 2,
         hull: 5,
         atk: 2
-    });
+    }));
 
-    ships.push({
+    ships.push(createShip({
         player: state.players[1],
-        id: 2,
         name: 'TIE Fighter #1',
-        x: 40,
-        y: 40,
         skill: 3,
         hull: 3,
         atk: 1
-    });
+    }));
 
-    ships.push({
+    ships.push(createShip({
         player: state.players[1],
-        id: 3,
         name: 'TIE Fighter #2',
-        x: 30,
-        y: 40,
         skill: 1,
         hull: 3,
         atk: 1
-    });
+    }));
 
-    ships.push({
+    ships.push(createShip({
         player: state.players[0],
-        id: 4,
         name: 'Z-95 Headhunter',
-        x: 30,
-        y: 20,
         skill: 7,
         hull: 4,
         atk: 1
-    });
+    }));
 
     state.executeNextStep = function () {
         var step = stepIterator.next();
@@ -87,7 +76,14 @@ function init(game) {
     }
 
     function isFinished(state) {
-        return state.turn > 10;
+        var shipCountsByPlayer = _.map(state.players, function (player) {
+            return _.filter(state.ships, function (ship) {
+                return ship.player === player;
+            }).length;
+        });
+        return _.any(shipCountsByPlayer, function (count) {
+                return count === 0;
+            });
     }
 
     return state;
