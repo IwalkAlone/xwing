@@ -16,6 +16,8 @@ function init(game) {
     var ships = [];
     state.ships = ships;
 
+    var stepIterator = createStepIterator();
+
     ships.push({
         player: state.players[0],
         id: 1,
@@ -60,19 +62,32 @@ function init(game) {
         atk: 1
     });
 
-    state.nextStep = createStepIterator().next;
+    state.executeNextStep = function () {
+        var step = stepIterator.next();
+        var stepPromise = q(step(state));
+        return stepPromise;
+    };
+
     state.logger = createLogger();
     state.log = state.logger.log;
     state.start = start;
 
     function start() {
-        doStep();
+        doStep(state);
     }
 
-    function doStep() {
-        var statePromise = q(state);
-        statePromise.then(state.nextStep()).then(state.nextStep()).then(state.nextStep())
-            .then(state.nextStep()).then(state.nextStep()).then(state.nextStep()).then(state.nextStep());
+    function doStep(state) {
+        if (isFinished(state)) {
+            return 0;
+        }
+
+        state.executeNextStep().then(function (state) {
+            doStep(state);
+        });
+    }
+
+    function isFinished(state) {
+        return state.turn > 10;
     }
 
     return state;
