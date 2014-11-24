@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var Q = require('q');
+var q = require('q');
 var createLogger = require('./gameLog').create;
 var createStepIterator = require('./steps/stepIterator').create;
 
@@ -30,7 +30,7 @@ function init(game) {
     ships.push({
         player: state.players[1],
         id: 2,
-        name: 'TIE Fighter',
+        name: 'TIE Fighter #1',
         x: 40,
         y: 40,
         skill: 3,
@@ -41,11 +41,22 @@ function init(game) {
     ships.push({
         player: state.players[1],
         id: 3,
-        name: 'TIE Fighter',
-        x: 40,
+        name: 'TIE Fighter #2',
+        x: 30,
         y: 40,
         skill: 1,
         hull: 3,
+        atk: 1
+    });
+
+    ships.push({
+        player: state.players[0],
+        id: 4,
+        name: 'Z-95 Headhunter',
+        x: 30,
+        y: 20,
+        skill: 7,
+        hull: 4,
         atk: 1
     });
 
@@ -59,17 +70,9 @@ function init(game) {
     }
 
     function doStep() {
-        var stepEnd = Q.defer();
-        var stepEndPromise = stepEnd.promise;
-        var step = state.nextStep();
-        step(state, stepEnd);
-        stepEndPromise.then(function () {
-            if (state.turn <= 5) {
-                doStep();
-            }
-        });
-
-        return stepEndPromise;
+        var statePromise = q(state);
+        statePromise.then(state.nextStep()).then(state.nextStep()).then(state.nextStep())
+            .then(state.nextStep()).then(state.nextStep()).then(state.nextStep()).then(state.nextStep());
     }
 
     return state;

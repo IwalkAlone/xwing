@@ -1,9 +1,11 @@
 'use strict';
 
-function turnStart(state, stepEnd) {
+var q = require('q');
+
+function turnStart(state) {
     state.turn += 1;
     state.log('Turn ' + state.turn);
-    stepEnd.resolve();
+    return state;
 }
 
 module.exports = turnStart;
