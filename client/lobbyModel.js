@@ -15,7 +15,8 @@ angular.module('main')
         var socket;
 
         function connect(name) {
-            socket = lobbySocket(name);
+            lobbySocket.connect(name);
+            socket = lobbySocket.get();
         }
 
         function createGame() {
@@ -40,10 +41,6 @@ angular.module('main')
 
         $rootScope.$on('socket:gameStart', function () {
             $state.go('game');
-        });
-
-        $rootScope.$on('socket:decision', function (event, decision) {
-            console.log(decision);
         });
 
         return model;

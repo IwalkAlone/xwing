@@ -10,7 +10,15 @@ function init(game) {
     var state = {
         turn: 0,
         players: _.map(game.players, function (player) {
-            return player.name;
+            return  {
+                name: player.name,
+                emit: function (event, data) {
+                    return player.socket.emit(event, data);
+                },
+                on: function (event, callback) {
+                    return player.socket.on(event, callback);
+                }
+            };
         })
     };
 

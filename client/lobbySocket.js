@@ -2,11 +2,18 @@
 
 angular.module('main')
     .factory('lobbySocket', ['socketFactory', function (socketFactory) {
-        return connect;
+        var socket;
+
+        return {
+            connect: connect,
+            get: function () {
+                return socket;
+            }
+        };
 
         function connect(name) {
             var ioSocket = io.connect('http://localhost:3000');
-            var socket = socketFactory({ioSocket: ioSocket});
+            socket = socketFactory({ioSocket: ioSocket});
             socket.forward('updateGamesList');
             socket.forward('updatePlayersList');
             socket.forward('gameStart');
@@ -17,7 +24,5 @@ angular.module('main')
             socket.on('connect', function () {
                 socket.emit('joinLobby', name);
             });
-
-            return socket;
         }
     }]);

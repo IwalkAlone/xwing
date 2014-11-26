@@ -9,7 +9,8 @@ var resolveDecisionStub = function (decision) {
     return deferred.promise;
 };
 
-var resolveDecision = resolveDecisionStub;
+//var resolveDecision = resolveDecisionStub;
+var resolveDecision = require('../resolveDecision');
 
 function combat(state) {
 
@@ -44,14 +45,18 @@ function processShip(ship, state) {
     var targets = getTargetsForShip(ship, state);
     var decision = {
         type: 'chooseAttackTarget',
+        player: ship.player,
         options: _.map(targets, function (target) {
-            return target.name;
+            return {
+                description: 'Attack' + target.name,
+                shipName: target.name
+            };
         })
     };
 
     resolveDecision(decision).then(function(resolution) {
         var target = _.find(state.ships, function (ship) {
-            return ship.name === resolution;
+            return ship.name === resolution.shipName;
         });
         attackTarget(ship, target, state);
         processShipDeferred.resolve(state);
