@@ -32,15 +32,15 @@ function init(game) {
         name: 'X-Wing',
         skill: 2,
         hull: 5,
-        atk: 2
+        atk: 3
     }));
 
     ships.push(createShip({
         player: state.players[1],
         name: 'TIE Fighter #1',
-        skill: 3,
+        skill: 9,
         hull: 3,
-        atk: 1
+        atk: 2
     }));
 
     ships.push(createShip({
@@ -48,7 +48,7 @@ function init(game) {
         name: 'TIE Fighter #2',
         skill: 1,
         hull: 3,
-        atk: 1
+        atk: 2
     }));
 
     ships.push(createShip({
@@ -56,7 +56,7 @@ function init(game) {
         name: 'Z-95 Headhunter',
         skill: 7,
         hull: 4,
-        atk: 1
+        atk: 2
     }));
 
     state.executeNextStep = function () {
