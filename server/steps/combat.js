@@ -54,7 +54,7 @@ function processShip(state, ship) {
         })
     };
 
-    resolveDecision(decision).then(function(resolution) {
+    resolveDecision(state, decision).then(function(resolution) {
         var target = _.find(state.ships, function (ship) {
             return ship.name === resolution.shipName;
         });

@@ -12,10 +12,6 @@ function startGame (game) {
 
     game.socket.emit('initialState', gameState);
     gameState.start();
-    setInterval(function () {
-        game.socket.emit('logUpdate', gameState.logger.getAll());
-        console.log('log update');
-    }, 2000);
 }
 
 module.exports.startGame = startGame;

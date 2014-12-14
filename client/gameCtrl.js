@@ -8,8 +8,9 @@ angular.module('main')
             console.log(state);
         });
 
-        $scope.$on('socket:logUpdate', function (event, log) {
-            $scope.log = log;
+        $scope.$on('socket:stateUpdate', function (event, data) {
+            $scope.log = data.log;
+            $scope.state = data.state;
         });
 
         $scope.$on('socket:decision', function (event, decision) {

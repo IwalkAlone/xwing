@@ -18,7 +18,7 @@ angular.module('main')
             socket.forward('updatePlayersList');
             socket.forward('gameStart');
             socket.forward('initialState');
-            socket.forward('logUpdate');
+            socket.forward('stateUpdate');
             socket.forward('decision');
 
             socket.on('connect', function () {

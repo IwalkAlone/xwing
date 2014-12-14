@@ -68,6 +68,7 @@ function init(game) {
     state.logger = createLogger();
     state.log = state.logger.log;
     state.start = start;
+    state.toAllPlayers = toAllPlayers;
 
     function start() {
         doStep(state);
@@ -81,6 +82,10 @@ function init(game) {
         state.executeNextStep().then(function (state) {
             doStep(state);
         });
+    }
+
+    function toAllPlayers(event, message) {
+        game.socket.emit(event, message);
     }
 
     function isFinished(state) {
