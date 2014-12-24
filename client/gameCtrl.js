@@ -4,17 +4,25 @@ angular.module('main')
     .controller('gameController', ['$scope', 'lobbySocket', function ($scope, lobbySocket) {
         var socket = lobbySocket.get();
 
-        $scope.$on('socket:initialState', function (event, state) {
+        setInterval(function () {
+            console.log(lobbySocket.queue);
+        }, 5000);
+
+        socket.on('initialState', function (event, state) {
             console.log(state);
         });
 
-        $scope.$on('socket:stateUpdate', function (event, data) {
-            $scope.log = data.log;
-            $scope.state = data.state;
+        socket.on('stateUpdate', function (event, data) {
+            $scope.$apply(function () {
+                $scope.log = data.log;
+                $scope.state = data.state;
+            });
         });
 
-        $scope.$on('socket:decision', function (event, decision) {
-            $scope.decision = decision;
+        socket.on('decision', function (event, decision) {
+            $scope.$apply(function () {
+                $scope.decision = decision;
+            });
         });
         
         $scope.decisionSelectOption = function (option) {
