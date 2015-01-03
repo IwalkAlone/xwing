@@ -14,3 +14,9 @@ angular.module('main', ['btford.socket-io', 'ui.router'])
             });
     }])
     .run(['lobbySocket', function (lobbySocket) {}]);
+
+require('./libs/socket');
+require('./lobbySocket');
+require('./gameCtrl');
+require('./lobbyModel');
+require('./lobbyCtrl');
