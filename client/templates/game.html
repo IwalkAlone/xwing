@@ -1,18 +1,3 @@
-<div ng-controller="gameController">
-    <div ng-if="decision">
-        <ul>
-            <li ng-repeat="_option in decision.options">
-                <span ng-click="decisionSelectOption(_option)">{{_option.description}}</span>
-            </li>
-        </ul>
-    </div>
-    <hr/>
-
-    <div>
-        <p ng-repeat="_entry in log">{{_entry.timestamp}}: {{_entry.message}}</p>
-    </div>
-</div>
-
 <xw-game>
 
 </xw-game>

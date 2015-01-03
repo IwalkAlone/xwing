@@ -48,7 +48,7 @@ function processShip(state, ship) {
         player: ship.player,
         options: _.map(targets, function (target) {
             return {
-                description: 'Attack' + target.name,
+                description: 'Attack ' + target.name,
                 shipName: target.name
             };
         })

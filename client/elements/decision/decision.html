@@ -1,0 +1,14 @@
+<polymer-element name="xw-decision">
+    <template>
+        <template if="{{decision}}">
+            <div vertical layout>
+                <div>
+                    Type: {{decision.type}}
+                </div>
+                <template repeat="{{option in decision.options}}">
+                    <li>{{option.description}}</li>
+                </template>
+            </div>
+        </template>
+    </template>
+</polymer-element>
