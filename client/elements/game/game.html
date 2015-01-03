@@ -1,14 +1,16 @@
 <polymer-element name="xw-game" horizontal layout>
     <template>
         <style>
-            div {
-                padding: 10px;
-            }
-            
+
             canvas {
                 border: 1px red dashed;
                 width: 900px;
                 height: 900px;
+            }
+
+            paper-shadow {
+                margin: 0.5em;
+                padding: 0.5em;
             }
 
             .playArea {
@@ -17,31 +19,24 @@
             }
 
             .vertical {
-                overflow-y: auto;
-                border: 1px black solid;
                 min-width: 200px;
-                max-height: 900px;
-            }
-
-            .bottomBorder {
-                border-bottom: 1px black dashed;
             }
 
         </style>
 
-        <div class="playArea">
+        <paper-shadow class="playArea" z="1">
             <canvas></canvas>
-        </div>
+        </paper-shadow>
         <div vertical layout flex class="vertical">
             <xw-log class="bottomBorder" log="{{log}}"></xw-log>
-            <xw-decision flex></xw-decision>
+            <xw-decision flex relative></xw-decision>
         </div>
         <div vertical layout flex class="vertical">
-            <div flex class="bottomBorder">Opponent Area</div>
-            <div flex>
+            <paper-shadow z="1" flex>Opponent Area</paper-shadow>
+            <paper-shadow z="1" flex>
                 Player Area
                 Turn: {{state.turn}}
-            </div>
+            </paper-shadow>
         </div>
         </div>
     </template>

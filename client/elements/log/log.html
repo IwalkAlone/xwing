@@ -7,13 +7,20 @@
                 height: 700px;
             }
 
+            paper-shadow {
+                margin: 0.5em;
+                padding: 0.5em;
+            }
+
         </style>
-        <core-list data="{{log}}" height="20">
-            <template>
-                <div class="row">
-                    {{model.timestamp}} : {{model.message}}
-                </div>
-            </template>
-        </core-list>
+        <paper-shadow z="1">
+            <core-list data="{{log}}" height="15">
+                <template>
+                    <div class="row">
+                        {{model.timestamp}} : {{model.message}}
+                    </div>
+                </template>
+            </core-list>
+        </paper-shadow>
     </template>
 </polymer-element>

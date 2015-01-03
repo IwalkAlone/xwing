@@ -1,14 +1,22 @@
 <polymer-element name="xw-decision">
     <template>
-        <template if="{{decision}}">
-            <div vertical layout>
+        <style>
+            paper-shadow {
+                margin: 0.5em;
+                padding: 0.5em;
+            }
+        </style>
+        <paper-shadow z="1" fit>
+            <template if="{{decision}}">
+
                 <div>
                     Type: {{decision.type}}
                 </div>
                 <template repeat="{{option in decision.options}}">
                     <li>{{option.description}}</li>
                 </template>
-            </div>
-        </template>
+            </template>
+
+        </paper-shadow>
     </template>
 </polymer-element>
