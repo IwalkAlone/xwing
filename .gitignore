@@ -30,4 +30,4 @@ bower_components
 
 .idea
 
-client/bundle.js
+bundle.js

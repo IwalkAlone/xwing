@@ -1,0 +1,40 @@
+<polymer-element name="xw-game">
+    <template>
+        <style>
+            div {
+                border: 1px black solid;
+            }
+            
+            canvas {
+                border: 1px red dashed;
+                width: 800px;
+                height: 800px;
+                margin: 10px;
+            }
+
+            .playArea {
+                min-width: 820px;
+                min-height: 800px;
+            }
+
+            .vertical {
+                min-width: 200px;
+            }
+
+        </style>
+            <div horizontal layout>
+                <div class="playArea">
+                    <canvas></canvas>
+                </div>
+                <div vertical layout flex class="vertical">
+                    <div flex three>Game Log</div>
+                    <div flex one>Decision Box</div>
+                </div>
+                <div vertical layout flex class="vertical">
+                    <div flex>Opponent Area</div>
+                    <div flex>Player Area</div>
+                </div>
+            </div>
+        </div>
+    </template>
+</polymer-element>
