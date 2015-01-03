@@ -62,8 +62,6 @@ angular.module('main')
                 });
             });
 
-            socket.on('connect', function () {
-                socket.emit('joinLobby', name);
-            });
+            socket.emit('joinLobby', name);
         }
     }]);

@@ -2,7 +2,7 @@
     <template>
         <style>
             div {
-                border: 1px black solid;
+                padding: 10px;
             }
             
             canvas {
@@ -18,21 +18,33 @@
             }
 
             .vertical {
+                border: 1px black solid;
                 min-width: 200px;
+            }
+
+            .bottomBorder {
+                border-bottom: 1px black dashed;
             }
 
         </style>
             <div horizontal layout>
-                <div class="playArea">
+                <div class="playArea vertical">
                     <canvas></canvas>
                 </div>
                 <div vertical layout flex class="vertical">
-                    <div flex three>Game Log</div>
+                    <div flex three class="bottomBorder">
+                        <template repeat="{{entry in log}}">
+                            <li>{{entry.timestamp}} : {{entry.message}}</li>
+                        </template>
+                    </div>
                     <div flex one>Decision Box</div>
                 </div>
                 <div vertical layout flex class="vertical">
-                    <div flex>Opponent Area</div>
-                    <div flex>Player Area</div>
+                    <div flex class="bottomBorder">Opponent Area</div>
+                    <div flex>
+                        Player Area
+                        Turn: {{state.turn}}
+                    </div>
                 </div>
             </div>
         </div>
