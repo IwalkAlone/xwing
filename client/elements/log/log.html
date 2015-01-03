@@ -1,0 +1,19 @@
+<polymer-element name="xw-log" attributes="log" noscript>
+    <template>
+        <style>
+
+            core-list {
+                overflow-y: auto;
+                height: 700px;
+            }
+
+        </style>
+        <core-list data="{{log}}" height="20">
+            <template>
+                <div class="row">
+                    {{model.timestamp}} : {{model.message}}
+                </div>
+            </template>
+        </core-list>
+    </template>
+</polymer-element>

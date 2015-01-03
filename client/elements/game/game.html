@@ -1,4 +1,4 @@
-<polymer-element name="xw-game">
+<polymer-element name="xw-game" horizontal layout>
     <template>
         <style>
             div {
@@ -7,19 +7,20 @@
             
             canvas {
                 border: 1px red dashed;
-                width: 800px;
-                height: 800px;
-                margin: 10px;
+                width: 900px;
+                height: 900px;
             }
 
             .playArea {
-                min-width: 820px;
-                min-height: 800px;
+                min-width: 900px;
+                min-height: 900px;
             }
 
             .vertical {
+                overflow-y: auto;
                 border: 1px black solid;
                 min-width: 200px;
+                max-height: 900px;
             }
 
             .bottomBorder {
@@ -27,26 +28,21 @@
             }
 
         </style>
-            <div horizontal layout>
-                <div class="playArea">
-                    <canvas></canvas>
-                </div>
-                <div vertical layout flex class="vertical">
-                    <div flex three class="bottomBorder">
-                        <template repeat="{{entry in log}}">
-                            <li>{{entry.timestamp}} : {{entry.message}}</li>
-                        </template>
-                    </div>
-                    <xw-decision flex one></xw-decision>
-                </div>
-                <div vertical layout flex class="vertical">
-                    <div flex class="bottomBorder">Opponent Area</div>
-                    <div flex>
-                        Player Area
-                        Turn: {{state.turn}}
-                    </div>
-                </div>
+
+        <div class="playArea">
+            <canvas></canvas>
+        </div>
+        <div vertical layout flex class="vertical">
+            <xw-log class="bottomBorder" log="{{log}}"></xw-log>
+            <xw-decision flex></xw-decision>
+        </div>
+        <div vertical layout flex class="vertical">
+            <div flex class="bottomBorder">Opponent Area</div>
+            <div flex>
+                Player Area
+                Turn: {{state.turn}}
             </div>
+        </div>
         </div>
     </template>
 </polymer-element>
