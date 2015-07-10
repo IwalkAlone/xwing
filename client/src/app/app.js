@@ -1,16 +1,16 @@
 'use strict';
 
-angular.module('main', ['btford.socket-io', 'ui.router'])
+angular.module('main')
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
         $stateProvider
             .state('lobby', {
                 url: '/',
-                templateUrl: 'templates/lobby.html'
+                templateUrl: 'lobby/lobby.html'
             })
             .state('game', {
                 url: '/game',
-                templateUrl: 'templates/game.html'
+                templateUrl: 'game/game.html'
             });
     }])
     .run(['lobbySocket', 'game', function (lobbySocket, game) {}]);
