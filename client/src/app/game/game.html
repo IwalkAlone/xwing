@@ -6,17 +6,10 @@
         <div class="game-right-panel-item">
             <game-log></game-log>
         </div>
-        <div class="game-right-panel-item">Decision box</div>
+        <div class="game-right-panel-item">
+            <decision></decision>
+        </div>
         <div class="game-right-panel-item">Opp's stuff</div>
         <div class="game-right-panel-item">My stuff</div>
     </div> <!-- right panel -->
-
-
-    <div ng-if="game.decision">
-        <ul>
-            <li ng-repeat="_option in game.decision.options">
-                <span ng-click="decisionSelectOption(_option)">{{_option.description}}</span>
-            </li>
-        </ul>
-    </div>
 </div>

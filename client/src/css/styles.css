@@ -25,4 +25,5 @@
 .game-log {
     max-height: 24vh;
     overflow-y: auto;
+    line-height: 0.3em;
 }

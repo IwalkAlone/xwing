@@ -1,0 +1,7 @@
+<div ng-if="game.decision">
+    <ul>
+        <li ng-repeat="_option in game.decision.options">
+            <button ng-click="decisionSelectOption(_option)">{{_option.description}}</button>
+        </li>
+    </ul>
+</div>

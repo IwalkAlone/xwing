@@ -5,13 +5,6 @@ angular.module('main')
         lobbySocket.get().then(function (socket) {
             $scope.game = game;
 
-            $scope.decisionSelectOption = function (option) {
-                socket.emit('decisionResponse', option);
-                resetDecision();
-            };
 
-            function resetDecision () {
-                game.decision = null;
-            }
         });
     }]);
