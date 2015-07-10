@@ -1,7 +1,7 @@
 <div ng-controller="gameController" class="game-container">
     <div class="game-left-panel">
         Schlachtfield
-    </div> <!-- left panel -->
+    </div>
     <div class="game-right-panel">
         <div class="game-right-panel-item">
             <game-log></game-log>
@@ -9,7 +9,11 @@
         <div class="game-right-panel-item">
             <decision></decision>
         </div>
-        <div class="game-right-panel-item">Opp's stuff</div>
-        <div class="game-right-panel-item">My stuff</div>
-    </div> <!-- right panel -->
+        <div class="game-right-panel-item">
+            <player-area player="opponent"></player-area>
+        </div>
+        <div class="game-right-panel-item">
+            <player-area player="player"></player-area>
+        </div>
+    </div>
 </div>

@@ -4,14 +4,6 @@ var _ = require('lodash');
 
 var players = [];
 
-var newId = (function () {
-    var id = 0;
-    return function () {
-        id += 1;
-        return id;
-    };
-}());
-
 function list() {
     return _.map(players, function (player) {
         return {
@@ -22,7 +14,7 @@ function list() {
 }
 
 function add(player) {
-    player.id = newId();
+    player.id = _.uniqueId('player_');
     players.push(player);
 }
 

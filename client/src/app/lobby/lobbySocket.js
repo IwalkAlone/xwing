@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('main')
-    .factory('lobbySocket', ['socketFactory', '$q', function (socketFactory, $q) {
+    .factory('lobbySocket', function (socketFactory, $q, playerData) {
         var socket;
         var queue = [];
         var socketDeferred = $q.defer();
@@ -43,9 +43,14 @@ angular.module('main')
             });
 
             socket.on('connect', function () {
+                playerData.name = name;
                 socket.emit('joinLobby', name);
+            });
+
+            socket.on('playerIdAssigned', function (id) {
+                playerData.id = id;
             });
 
             socketDeferred.resolve(socket);
         }
-    }]);
+    });

@@ -12,6 +12,7 @@ function init(game) {
         players: _.map(game.players, function (player) {
             return  {
                 name: player.name,
+                id: player.id,
                 emit: function (event, data) {
                     return player.socket.emit(event, data);
                 },

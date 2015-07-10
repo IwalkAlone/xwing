@@ -2,24 +2,17 @@
 
 var _ = require('lodash');
 
-var newId = (function () {
-    var id = 0;
-    return function () {
-        id += 1;
-        return id;
-    };
-}());
-
 function create(shipCard) {
     var ship = {};
-    ship.atk = shipCard.atk;
-    ship.hull = shipCard.hull;
-    ship.dmg = shipCard.dmg;
+    ship.atk = shipCard.atk || 0;
+    ship.agi = shipCard.agi || 0;
+    ship.hull = shipCard.hull || 0;
+    ship.shield = shipCard.shield || 0;
     ship.skill = shipCard.skill;
     ship.name = shipCard.name;
     ship.player = shipCard.player;
 
-    ship.id = newId();
+    ship.id = _.uniqueId('ship_');
 
     ship.takeDamage = takeDamage;
 

@@ -83,6 +83,7 @@ socketServer.on('connection', function (socket) {
         };
         socket.player = player;
         players.add(player);
+        socket.emit('playerIdAssigned', player.id);
         socket.emit('updateGamesList', games.list());
         pushPlayersUpdate();
         console.log('Add player, id=' + player.id + ',name=' + player.name);

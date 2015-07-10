@@ -1,0 +1,16 @@
+<div>
+    <ul>
+        <li ng-repeat="_ship in ships">
+            <b>
+                {{_ship.name}}&nbsp;
+                <span class="ship-stat-line">
+                    <span style="color: orange;">{{_ship.skill}}</span>&nbsp;
+                    <span style="color: red;">{{_ship.atk}}</span> /
+                    <span style="color: lightgreen;">{{_ship.agi}}</span> /
+                    <span style="color: yellow;">{{_ship.hull}}</span> /
+                    <span style="color: blue;">{{_ship.shield}}</span>
+                </span>
+            </b>
+        </li>
+    </ul>
+</div>
