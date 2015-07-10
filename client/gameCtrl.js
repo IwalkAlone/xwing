@@ -7,11 +7,11 @@ angular.module('main')
 
             $scope.decisionSelectOption = function (option) {
                 socket.emit('decisionResponse', option);
-                $scope.resetDecision();
+                resetDecision();
             };
 
-            $scope.resetDecision = function () {
-                $scope.decision = null;
-            };
+            function resetDecision () {
+                game.decision = null;
+            }
         });
     }]);

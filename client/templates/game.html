@@ -1,4 +1,15 @@
-<div ng-controller="gameController">
+<div ng-controller="gameController" class="game-container">
+    <div class="game-left-panel">
+        Schlachtfield
+    </div> <!-- left panel -->
+    <div class="game-right-panel">
+        <div class="game-right-panel-item">Log</div>
+        <div class="game-right-panel-item">Decision box</div>
+        <div class="game-right-panel-item">Opp's stuff</div>
+        <div class="game-right-panel-item">My stuff</div>
+    </div> <!-- right panel -->
+
+
     <div ng-if="game.decision">
         <ul>
             <li ng-repeat="_option in game.decision.options">
