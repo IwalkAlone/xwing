@@ -13,4 +13,4 @@ angular.module('main', ['btford.socket-io', 'ui.router'])
                 templateUrl: 'templates/game.html'
             });
     }])
-    .run(['lobbySocket', function (lobbySocket) {}]);
+    .run(['lobbySocket', 'game', function (lobbySocket, game) {}]);

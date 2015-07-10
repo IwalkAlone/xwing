@@ -1,15 +1,16 @@
 'use strict';
 
 angular.module('main')
-    .factory('lobbySocket', ['socketFactory', function (socketFactory) {
+    .factory('lobbySocket', ['socketFactory', '$q', function (socketFactory, $q) {
         var socket;
         var queue = [];
+        var socketDeferred = $q.defer();
 
         return {
             connect: connect,
             queue: queue,
             get: function () {
-                return socket;
+                return socketDeferred.promise;
             }
         };
 
@@ -35,24 +36,6 @@ angular.module('main')
                 'connect_error'
             ];
 
-            var queueEvents = [
-                'updateGamesList',
-                'updatePlayersList',
-                'gameStart',
-                'initialState',
-                'stateUpdate',
-                'decision'
-            ];
-
-            _.each(queueEvents, function (event, data) {
-                socket.on(event, function () {
-                    queue.push({
-                        event: event,
-                        data: data
-                    });
-                });
-            });
-
             _.each(logEvents, function (event) {
                 socket.on(event, function () {
                     console.log(event);
@@ -62,5 +45,7 @@ angular.module('main')
             socket.on('connect', function () {
                 socket.emit('joinLobby', name);
             });
+
+            socketDeferred.resolve(socket);
         }
     }]);

@@ -16,7 +16,9 @@ angular.module('main')
 
         function connect(name) {
             lobbySocket.connect(name);
-            socket = lobbySocket.get();
+            lobbySocket.get().then(function (createdSocket) {
+                socket = createdSocket;
+            });
         }
 
         function createGame() {

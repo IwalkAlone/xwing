@@ -1,7 +1,7 @@
 <div ng-controller="gameController">
-    <div ng-if="decision">
+    <div ng-if="game.decision">
         <ul>
-            <li ng-repeat="_option in decision.options">
+            <li ng-repeat="_option in game.decision.options">
                 <span ng-click="decisionSelectOption(_option)">{{_option.description}}</span>
             </li>
         </ul>
@@ -9,7 +9,7 @@
     <hr/>
 
     <div>
-        <p ng-repeat="_entry in log">{{_entry.timestamp}}: {{_entry.message}}</p>
+        <p ng-repeat="_entry in game.log">{{_entry.timestamp}}: {{_entry.message}}</p>
     </div>
 
 
