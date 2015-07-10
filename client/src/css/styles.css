@@ -1,7 +1,7 @@
 .game-container {
     display: flex;
     flex-direction: row;
-    height: 90vh;
+    height: 96vh;
 }
 
 .game-left-panel {
@@ -18,5 +18,11 @@
 
 .game-right-panel-item {
     border: 1px solid black;
+    max-height: 24vh;
     flex: 1 1 auto;
+}
+
+.game-log {
+    max-height: 24vh;
+    overflow-y: auto;
 }

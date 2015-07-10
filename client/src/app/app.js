@@ -13,4 +13,4 @@ angular.module('main')
                 templateUrl: 'game/game.html'
             });
     }])
-    .run(['lobbySocket', 'game', function (lobbySocket, game) {}]);
+    .run(function (lobbySocket, game) {});

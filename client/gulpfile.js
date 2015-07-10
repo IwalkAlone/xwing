@@ -120,29 +120,8 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest(path.build.fonts));
 });
 
-gulp.task('watch',['build-dev'], function(){
-
-    watch(path.watch.js, function(event, cb) {
-        gulp.start('js-app');
-    });
-    watch([path.watch.html_index], function(event, cb) {
-        gulp.start('libs');
-    });
-    watch([path.watch.html_index_test], function(event, cb) {
-        gulp.start('move-index-test');
-    });
-    watch([path.watch.img], function(event, cb) {
-        gulp.start('images');
-    });
-    watch([path.watch.fonts], function(event, cb) {
-        gulp.start('fonts');
-    });
-    watch(path.watch.html, function(event, cb) {
-        gulp.start('html-templates');
-    });
-    //watch([path.watch.style], function(event, cb) {
-        //gulp.start('less-build');
-    //});
+gulp.task('watch', ['build-dev'], function() {
+    gulp.watch('src/**', ['build-dev']);
 });
 
 gulp.task('build-dev', ['libs', 'js-app', 'html-templates', 'images', 'fonts']);

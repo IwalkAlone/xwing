@@ -3,7 +3,9 @@
         Schlachtfield
     </div> <!-- left panel -->
     <div class="game-right-panel">
-        <div class="game-right-panel-item">Log</div>
+        <div class="game-right-panel-item">
+            <game-log></game-log>
+        </div>
         <div class="game-right-panel-item">Decision box</div>
         <div class="game-right-panel-item">Opp's stuff</div>
         <div class="game-right-panel-item">My stuff</div>
@@ -17,11 +19,4 @@
             </li>
         </ul>
     </div>
-    <hr/>
-
-    <div>
-        <p ng-repeat="_entry in game.log">{{_entry.timestamp}}: {{_entry.message}}</p>
-    </div>
-
-
 </div>
