@@ -9,9 +9,7 @@ socket.on('stateUpdate', function (data) {
         return;
     }
     lastStateUpdate = data;
-    for (var i = 0; i <= 100; i += 1) {
-        lastStateUpdate.log.push({timestamp: i, message: i});
-    }
+    console.log('State update:');
     console.log(lastStateUpdate);
 });
 

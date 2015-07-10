@@ -5,18 +5,21 @@
                 margin: 0.5em;
                 padding: 0.5em;
             }
+
+            paper-button {
+                margin: 0.5em;
+            }
         </style>
         <paper-shadow z="1" fit>
-            <template if="{{decision}}">
+            <template if="{{decision.active}}">
 
                 <div>
                     Type: {{decision.type}}
                 </div>
                 <template repeat="{{option in decision.options}}">
-                    <li>{{option.description}}</li>
+                    <paper-button raised on-click="{{optionClick}}">{{option.description}}</paper-button>
                 </template>
             </template>
-
         </paper-shadow>
     </template>
 </polymer-element>
