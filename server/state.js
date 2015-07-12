@@ -5,7 +5,7 @@ var q = require('q');
 var createLogger = require('./gameLog').create;
 var createShip = require('./ship');
 var createStepIterator = require('./steps/stepIterator').create;
-var Vec2 = require('justmath').Vec2;
+var Vec2 = require('sat').Vector;
 var transform = require('./transform');
 
 function init(game) {
