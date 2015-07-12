@@ -36,7 +36,7 @@ function init(game) {
         skill: 2,
         hull: 5,
         atk: 3,
-        transform: transform(new Vec2(10, 10), new Vec2(0, 1))
+        transform: transform(new Vec2(200, 200), new Vec2(0, -1))
     }));
 
     ships.push(createShip({
@@ -45,7 +45,7 @@ function init(game) {
         skill: 9,
         hull: 3,
         atk: 2,
-        transform: transform(new Vec2(10, 800), new Vec2(0, -1))
+        transform: transform(new Vec2(800, 800), new Vec2(0, 1))
     }));
 
     ships.push(createShip({
@@ -54,7 +54,7 @@ function init(game) {
         skill: 1,
         hull: 3,
         atk: 2,
-        transform: transform(new Vec2(100, 850), new Vec2(0, -1))
+        transform: transform(new Vec2(600, 600), new Vec2(0, 1))
     }));
 
     ships.push(createShip({
@@ -63,7 +63,7 @@ function init(game) {
         skill: 7,
         hull: 4,
         atk: 2,
-        transform: transform(new Vec2(70, 10), new Vec2(0, 1))
+        transform: transform(new Vec2(400, 200), new Vec2(0, -1))
     }));
 
     state.executeNextStep = function () {

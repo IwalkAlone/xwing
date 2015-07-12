@@ -49,7 +49,7 @@ var path = {
         html: 'dist/',
         js: 'dist/js/',
         css: 'dist/css/',
-        img: 'dist/img/',
+        img: 'dist/images/',
         fonts: 'dist/fonts/',
         config: 'dist/'
     },
@@ -59,7 +59,7 @@ var path = {
         js: ['src/app/**/*.module.js', 'src/app/**/*.js', 'src/scripts/**/*.js', '!src/app/configParams*.js'],
         config: ['src/app/configParams*.js'],
         style: 'src/content/less/main.less',
-        img: 'src/content/img/**/*.*',
+        img: 'src/images/**/*.*',
         fonts: 'src/content/fonts/**/*.*'
     },
     watch: {
@@ -67,7 +67,7 @@ var path = {
         js: ['src/app/**/*.js', 'src/scripts/**/*.js'],
         html_index:'src/app/index.html',
         style: 'src/content/less/**/*.less',
-        img: 'src/img/**/*.*',
+        img: 'src/images/**/*.*',
         fonts: 'src/fonts/**/*.*'
     }
 };
