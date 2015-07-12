@@ -5,6 +5,8 @@ var q = require('q');
 var createLogger = require('./gameLog').create;
 var createShip = require('./ship');
 var createStepIterator = require('./steps/stepIterator').create;
+var Vec2 = require('justmath').Vec2;
+var transform = require('./transform');
 
 function init(game) {
     var state = {
@@ -33,7 +35,8 @@ function init(game) {
         name: 'X-Wing',
         skill: 2,
         hull: 5,
-        atk: 3
+        atk: 3,
+        transform: transform(new Vec2(10, 10), new Vec2(0, 1))
     }));
 
     ships.push(createShip({
@@ -41,7 +44,8 @@ function init(game) {
         name: 'TIE Fighter #1',
         skill: 9,
         hull: 3,
-        atk: 2
+        atk: 2,
+        transform: transform(new Vec2(10, 800), new Vec2(0, -1))
     }));
 
     ships.push(createShip({
@@ -49,7 +53,8 @@ function init(game) {
         name: 'TIE Fighter #2',
         skill: 1,
         hull: 3,
-        atk: 2
+        atk: 2,
+        transform: transform(new Vec2(100, 850), new Vec2(0, -1))
     }));
 
     ships.push(createShip({
@@ -57,7 +62,8 @@ function init(game) {
         name: 'Z-95 Headhunter',
         skill: 7,
         hull: 4,
-        atk: 2
+        atk: 2,
+        transform: transform(new Vec2(70, 10), new Vec2(0, 1))
     }));
 
     state.executeNextStep = function () {

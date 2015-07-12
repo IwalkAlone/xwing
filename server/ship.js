@@ -11,6 +11,7 @@ function create(shipCard) {
     ship.skill = shipCard.skill;
     ship.name = shipCard.name;
     ship.player = shipCard.player;
+    ship.transform = shipCard.transform;
 
     ship.id = _.uniqueId('ship_');
 
